@@ -29,16 +29,21 @@ app.get("/BuildingPages/:name", (req, res) => {
     res.send(rendering.renderPage("./public/pages/BuildingPages/" + req.params.name + ".html", fullscreen, "JS Adventure! | " + req.params.name));
 });
 
-app.get("/about", (req, res) => {
-    res.send(rendering.renderPage("./public/pages/login.html", oldCss, "JS Adventure! | About"));
+app.get("/NewPages/:name", (req, res) => {
+    res.send(rendering.renderPage("./public/pages/NewPages/" + req.params.name, fullscreen, "JS Adventure! | " + req.params.name));
+});
+
+app.get("/Login", (req, res) => {
+    res.send(rendering.renderPage("./public/pages/login.html", oldCss, "JS Adventure! | Login"));
 })
 
-app.post('/login', (req, res) => {
+
+app.post('/Login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
 
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'a' && password === 'a') {
         // If the user is authenticated, redirect to the dashboard page
         res.send(rendering.renderPage("./public/pages/admin.html", oldCss, "JS Adventure! | Admin Page"));
     } else {
@@ -47,21 +52,21 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.post('/login', (req, res) => {
+app.post('/admin', (req, res) => {
     // Extract form data
     const title = req.body.title;
     const image = req.body.image;
     const body = req.body.body;
     const code = req.body.code;
+    console.log("stocazzo")
 
     const fileName = `./public/pages/NewPages/${title}.html`;
     const html = `
-    <!DOCTYPE html>
-    <html>
       <head>
         <title>${title}</title>
       </head>
       <body>
+      <br>
         <div class="container">
             <div class="row justify-content-center">
                  <h1>${title}</h1>
@@ -91,7 +96,7 @@ app.post('/login', (req, res) => {
 
 
     // Redirect to new page
-    res.redirect(`/posts/${title}`);
+    res.redirect(`/`);
 });
 
 

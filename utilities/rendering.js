@@ -1,25 +1,29 @@
 import fs from "fs";
 
 
+
 function renderPage(page, cssString, tabTitle) {
     page = readPage(page)
-    let pagelinks =[]
-    fs.readdir("./public/pages/NewPages/", (err, files) => {
-        if (err) {
-            console.error(err);
-        } else {
-            pagelinks.push(files)
-            console.log(pagelinks)
-        }
+    let pageLinks = fs.readdirSync("./public/pages/NewPages/");
+    const stringLinks = pageLinks.map(function(page) {
+        return `<a class="dropdown-item" href="/NewPages/${page}">${page.replace(".html","")}</a>`;
     });
-    const navbar = fs.readFileSync("./public/components/navbar.html").toString()
+    console.log(stringLinks)
+    let navbar = fs.readFileSync("./public/components/navbar.html").toString()
         .replace("$CSS_FILENAME", cssString)
         .replace("$TAB_TITLE", tabTitle)
-    console.log()
+    if (stringLinks.length > 0) {
+        navbar = navbar.replace("$POSTS_ENTRIES", stringLinks.join(""));
+    } else {navbar = navbar.replace("$DISPLAY_POSTS", "d-none")}
+
+
+    console.log(stringLinks)
     const footer = fs.readFileSync("./public/components/footer.html").toString()
         .replace("$FOOTER_YEAR", `© ${new Date().getFullYear()}`);
     return navbar + page + footer;
 }
+
+
 
 function readPage(pagePath) {
     return fs.readFileSync(pagePath).toString();
