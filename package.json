@@ -1,0 +1,9 @@
+{
+  "name": "Meta-js",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2",
+    "escape-html": "^1.0.3"
+  }
+}

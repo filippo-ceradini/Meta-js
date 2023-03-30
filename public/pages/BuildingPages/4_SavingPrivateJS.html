@@ -1,0 +1,214 @@
+<body>
+
+<div class="container mt-5">
+
+
+    <div class="row justify-content-center">
+        <h1>Modules in Node.js</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <img src="https://i.redd.it/8ovn8n146tga1.png" width="50%">
+    </div>
+    <p>Node.js provides a built-in module system that allows developers to organize their code into reusable modules.
+        Modules in Node.js are similar to libraries or packages in other programming languages.</p>
+
+    <p>
+        To use a module, <code>require</code> and <code>import</code> are the mechanisms we can use, but they have some
+        differences in syntax and behavior.
+
+        <code>require</code> is the older of the two and is the standard way to load modules in Node.js. It is a
+        function that takes a module name as an argument and returns the exports of the module.
+        <code>import</code> is a newer feature that was introduced in ECMAScript 2015 (ES6). It is a keyword that is
+        used to load modules in modern JavaScript environments, including Node.js with the --experimental-modules flag
+        enabled.
+        Since we like to be up to date, and also that import has the benefit of asynchronous loading, we'll focus on the
+        later.
+        To use import, w need to modify the json file:
+    </p>
+
+    <pre>
+        <code>{
+        "name": "easy-js",
+        "version": "1.0.0",
+        "description": "easy Js website",
+        "main": "app.js",
+        <b>"type": "module",</b>
+        "license": "MIT",
+        "dependencies": {
+        "express": "^4.18.2",
+        "path": "^0.12.7"
+        }
+        }
+        </code>
+    </pre>
+
+    <h2>Serving HTML</h2>
+
+    <p>
+        With the use of a module, we can create an HTML page instead of hardcoding it in the app.js file.
+        The best way is to use <code>express.static</code>, a middleware function that we can add to the application
+        using <code>app.use()</code>.
+        When a client makes a request for a file in the public directory, the <code>express.static</code> middleware
+        looks for the file in the directory and serves it if it exists.
+        We can then use the module path to get the right path to the page:
+    </p>
+
+    <pre>
+        <code>
+            import express from "express";
+            <b style="color: orangered">import path from "express"</b>
+            import bodyParser from "express";
+            const app = express();
+            <b style="color: orangered">app.use(express.static("public"));</b>
+            app.use(bodyParser.urlencoded({ extended: false }));
+            app.use(express.json());
+
+            //
+            //
+
+            app.get('/', (req, res) => {
+            res.sendFile(<b style="color: orangered">path.resolve</b>('/public/index.html'));
+            });
+
+        </code>
+    </pre>
+
+    <p>
+        The HTML page will just look like this for now:
+    </p>
+
+    <pre>
+        <code>
+
+                 &lt;html&gt;
+                 &lt;head&gt;
+                   &lt;style&gt;
+                     body {
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       height: 100vh;
+                     }
+                   &lt;/style&gt;
+                 &lt;/head&gt;
+                 &lt;body&gt;
+                   &lt;h1&gt;Hello World&lt;/h1&gt;
+                 &lt;/body&gt;
+                 &lt;/html&gt;
+        </code>
+    </pre>
+
+    <div class="row justify-content-center">
+        <h1>Creating Modules</h1>
+    </div>
+    <div class="row justify-content-center">
+        <img src="https://miro.medium.com/v2/resize:fit:568/1*U-3Mg-K2goPFEfXM7VEBDg.jpeg">
+    </div>
+    <br>
+    <p>To create a module in Node.js, we need to create a new file with the <code>.js</code> extension and export the
+        functions or variables that you want to make available to other parts of our code. We'll call it meme-storage.js and move all our code from app js in it </p>
+
+    <pre>
+        <code>
+                let memes = [
+    {id: 1, link: 'https://www.youtube.com/watch?v=QH2-TGUlwu4'},
+    {id: 2, link: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg'},
+    {id: 3, link: 'https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png'},
+    {id: 3, link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}];
+
+function addMeme(newMemeLink) {
+    let newMeme = {
+        id: memes.length + 1,
+        name: newMemeLink,
+    };
+    memes.push(newMeme);
+}
+
+
+function deleteMemes(id) {
+    const singleMeme = memes.find(item => item.id === parseInt(id));
+    const index = memes.indexOf(singleMeme);
+    memes.splice(index, 1);
+}
+function getMemes() {
+    return memes;
+}
+
+
+module.exports = {
+    addMeme,
+    getMemes,
+    deleteMeme
+};
+        </code>
+    </pre>
+
+
+
+    <p>
+        We can now modify the rest of app.js to make use of these new functions:
+    </p>
+
+
+    <pre>
+        <code>
+            import express from "express";
+            import memeStorage from "./meme-storage.js";
+            import bodyParser  from "express";
+            import path from "express"
+            const app = express();
+            app.use(express.static("public"));
+            app.use(bodyParser.urlencoded({ extended: false }));
+            app.use(express.json());
+
+            // GET all meme
+            app.get('/meme', (req, res) => {
+            res.send(<b style="color: orangered">memeStorage.getMemes()</b>);
+            });
+
+            // GET single meme
+            app.get('/meme/:id', (req, res) => {
+            const singleMeme = <b style="color: orangered">memeStorage.getMemes()</b>.find(item => item.id === parseInt(req.params.id));
+            if (!singleMeme) {
+            return res.status(404).send('Meme not found');
+            }
+            res.send(singleMeme);
+            });
+
+            // POST new meme
+            app.post('/meme', (req, res) => {
+            const newMeme = {
+            id: <b style="color: orangered">memeStorage.getMemes()</b>.length + 1,
+            name: req.body.name,
+            };
+            <b style="color: orangered">memeStorage.addMeme(newMeme)</b>;
+            res.send(newMeme);
+            });
+
+
+            // PUT (update) existing meme
+            app.put('/meme/:id', (req, res) => {
+            res.send(<b style="color: orangered">memeStorage.putMemes</b>(req.params.id,req.body.link));
+            });
+
+            // DELETE meme
+            app.delete('/meme/:id', (req, res) => {
+            <b style="color: orangered">memeStorage.deleteMemes(req.params.id)</b>;
+            res.send(<b style="color: orangered">memeStorage.getMemes())</b>;
+            });
+
+            app.get('/', (req, res) => {
+            res.sendFile(path.resolve('/public/index.html'))
+            });
+
+            // Start server
+            const port = process.env.PORT || 3000;
+            app.listen(port, () => console.log(`Server running on port 3000`));
+        </code>
+    </pre>
+
+    <br>
+    <br>
+</div>
+</body>

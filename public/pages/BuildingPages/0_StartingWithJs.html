@@ -1,0 +1,444 @@
+<body>
+
+<div class="container mt-5">
+
+
+    <div class="row justify-content-center">
+        <h1>Introduction to JavaScript Coding</h1>
+
+        <img src="https://www.memecreator.org/static/images/memes/5411741.jpg" alt="JavaScript humor meme">
+
+    </div>
+    <br>
+    <br>
+
+    <p>
+        As introduced in the <a href="/HistoryPages/4_JavascriptHistory">History Page</a>, JavaScript is a programming
+        language used to make web pages interactive.
+    </p>
+    <p>
+        JavaScript can be used to manipulate the content of a web page. For example, you can use JavaScript to
+        change the text of an element on the page:
+    </p>
+
+    <pre><code>
+      var element = document.getElementById('my-element');
+      element.innerHTML = 'New text!';
+    </code></pre>
+
+    <p>
+        This code finds the element with the ID "my-element" and changes its content to "New text!".
+    </p>
+
+    <p>
+        <b>To be able to build a Node.JS server</b>, we're going to explore more of the basics now.<br>
+        I's JS for Dummies after all.
+    </p>
+
+    <br>
+    <br>
+
+
+    <div class="row justify-content-center">
+        <h1>Variables and Data Types in JavaScript</h1>
+        <img src="https://i.imgflip.com/7gazgm.jpg">
+    </div>
+    <br>
+    <p>In JavaScript, variables are used to store data values. There are several different data types that can be stored
+        in a variable, including:</p>
+    <div class="participation">
+        <ul>
+            <li>Number: represents numeric values, both integers and floating-point numbers.</li>
+            <li>String: represents a sequence of characters enclosed in quotes, either single ('') or double ("").</li>
+            <li>Boolean: represents a logical value that can be either true or false.</li>
+            <li>Null: represents an intentional absence of any object value.</li>
+            <li>Undefined: represents a variable that has been declared but has not been assigned a value.</li>
+            <li>Object: represents a collection of key-value pairs or properties, where each property can be of any data
+                type.
+            </li>
+        </ul>
+    </div>
+    <br>
+
+    <p>
+        Variables are declared using the <code>var</code>, <code>let</code>, or <code>const</code> keyword, depending on
+        how you want to use them.</p>
+    <p>
+        Here's an example of declaring and initializing a variable:
+    </p>
+    <pre>
+        <code>
+            let myNumber = 42;
+        </code>
+    </pre>
+    <p>In this case, <code>myNumber</code> is a variable of the <code>number</code> data type, and it has been
+        initialized with the value <code>42</code>.</p>
+    <p>
+        For example, to declare a variable called message with the string value "Hello, World!", you can use the
+        following code:
+    </p>
+
+    <pre>
+        <code>
+            const message = "Hello, World!";
+        </code>
+    </pre>
+    <p>
+        Here, <code>const</code> is the keyword that declares the variable, message is the name of the variable, and
+        "Hello,
+        World!" is
+        the value assigned to it.
+    </p>
+    <p>
+        While <code>var</code> has been traditionally used in JavaScript, its use has become somewhat outdated with the
+        introduction of let and const.
+    </p>
+    The main issue with <code>var</code> is that it has function scope, not block scope. This means that if you declare
+    a variable with <code>var</code> inside a function, it will be accessible throughout the entire function, regardless
+    of where it was declared. This can sometimes lead to unintended consequences and make it harder to reason about your
+    code.
+    <p>
+        In contrast, <code>let</code> and <code>const</code> have block scope, meaning that they are only accessible
+        within the block they were declared in. This can make your code easier to read and understand, and help prevent
+        errors.</p>
+    <p>
+        It's important to note that in JavaScript, <B>variables are dynamically typed</B>, which means that you don't
+        need to
+        specify the data type of the variable when you declare it.
+    <p> Instead, the data type is determined at runtime based
+        on the value assigned to the variable.
+
+    <p>
+        Here are some examples of variable declarations and data types:</p>
+    <pre>
+    <code><p>
+    var age = 25; // Number data type
+    var name = "John"; // String data type
+    var isMarried = false; // Boolean data type
+    var car = null; // Null data type
+    var address; // Undefined data type
+    var person = {name: "John", age: 25}; // Object data type
+        </code>
+    </pre>
+    <p>
+        In JavaScript, you can also use the typeof operator to check the data type of a variable:
+    <pre>
+    <code>
+    console.log(typeof age); // Output: "number"
+    console.log(typeof name); // Output: "string"
+    console.log(typeof isMarried); // Output: "boolean"
+    console.log(typeof car); // Output: "object"
+    console.log(typeof address); // Output: "undefined"
+    console.log(typeof person); // Output: "object"
+        </code>
+    </pre>
+
+
+
+
+    <div class="row justify-content-center">
+        <h1 class="row">Strict Mode</h1>
+    </div>
+    <div class="row justify-content-center">
+        <img src="https://pbs.twimg.com/media/EXdfdNRXYAAemu1.jpg">
+    </div>
+    <p>Strict mode is a way to introduce a secure coding standard in JavaScript. It helps to catch coding mistakes that
+        might lead to errors or unexpected behavior. Strict mode is a feature introduced in ECMAScript 5 (ES5).</p>
+    <p>Strict mode enforces a set of rules and restrictions on your JavaScript code. These rules are intended to prevent
+        common coding mistakes, and to make it easier to write secure, optimized code. Here are some of the restrictions
+        imposed by strict mode:</p>
+
+    <div class="participation">
+        <ul>
+            <li>Implicit declaration of variables is not allowed. All variables must be declared before use.</li>
+            <li>Assigning a value to a read-only property or a property that does not exist in an object results in an
+                error.
+            </li>
+            <li>Deleting a variable or a function is not allowed.</li>
+            <li>Function parameters must have unique names.</li>
+            <li>Using the 'with' statement is not allowed.</li>
+            <li>Octal numeric literals are not allowed.</li>
+            <li>Use of the 'eval' function is restricted.</li>
+        </ul>
+    </div>
+
+    <p>Strict mode can be enabled in two ways:</p>
+    <div class="participation">
+        <ul>
+            <li>By adding the string "use strict" at the beginning of a script or a function.</li>
+            <li>By enabling it for the entire script file by putting "use strict" at the beginning of the file.</li>
+        </ul>
+    </div>
+    <p>Here is an example of how to enable strict mode in a function:</p>
+    <pre>
+        function myFunction() {
+        "use strict";
+        // Function code goes here
+        }
+    </pre>
+    <p>Here is an example of how to enable strict mode for an entire script file:</p>
+    <pre>
+        "use strict";
+        // JavaScript code goes here
+    </pre>
+    <p>It's important to note that strict mode is not backward compatible with older versions of JavaScript. This means
+        that if you're upgrading an older codebase to ES5, you'll need to check for any code that might break under
+        strict mode and make the necessary changes.</p>
+    <br>
+    <br>
+
+    <div class="row row justify-content-center">
+
+        <h1>Lambda Functions in JavaScript</h1>
+        <img src="https://lh4.googleusercontent.com/K5yNvXjgCJrCS7WDtjWnpngDOYoKbDkEfTAkJcKUPiOWe30ETD2sSYfnthnzGW9JR3bg75BPsks1vEqVTL2MbXxhS0FjMnNotcyvKs8k2ceTGP2qZdKdOdH_A_gnJh3f6vp2JL5p">
+
+    </div>
+    <p>
+        Lambda functions, also known as anonymous functions, are a feature in JavaScript that allows you to define and call a function without assigning it a name.
+        They're typically used for short, simple functions that don't need to be reused in multiple places.
+    </p>
+    <h2>Defining Lambda Functions</h2>
+    <p>
+        In JavaScript, you can define a lambda function using the <code>() => {}</code> syntax.
+        The parentheses are used to pass in arguments, if any, and the curly braces are used to define the body of the function.
+        Here's an example:
+    </p>
+    <pre>
+      <code>
+        const multiply = (a, b) => {
+          return a * b;
+        };
+        console.log(multiply(3, 4)); // Output: 12
+      </code>
+    </pre>
+    <p>
+        In this example, we're defining a lambda function called <code>multiply</code> that takes in two arguments, <code>a</code> and <code>b</code>, and returns their product.
+        We're then calling the function with the arguments <code>3</code> and <code>4</code> and logging the result to the console.
+    </p>
+    <h2>Uses of Lambda Functions</h2>
+    <p>
+        Lambda functions are commonly used in JavaScript for tasks such as event handling, array manipulation, and asynchronous programming.
+        For example, here's how you can use a lambda function to sort an array of objects by a specific property:
+    </p>
+    <pre>
+      <code>
+        const people = [
+          { name: 'Alice', age: 25 },
+          { name: 'Bob', age: 30 },
+          { name: 'Charlie', age: 20 }
+        ];
+        const sortByAge = (a, b) => {
+          return a.age - b.age;
+        };
+        const sortedPeople = people.sort(sortByAge);
+        console.log(sortedPeople);
+        // Output:
+        // [
+        //   { name: 'Charlie', age: 20 },
+        //   { name: 'Alice', age: 25 },
+        //   { name: 'Bob', age: 30 }
+        // ]
+      </code>
+    </pre>
+    <p>
+        In this example, we're defining a lambda function called <code>sortByAge</code> that takes in two objects and returns the difference between their ages.
+        We're then using the <code>sort()</code> method on the <code>people</code> array to sort it by age using the <code>sortByAge</code> lambda function.
+        We're finally logging the sorted array to the console.
+    </p>
+    <br>
+    <br>
+
+    <h1>Iteration in JavaScript</h1>
+    <div class="row row justify-content-center">
+
+        <img src="https://timmousk.com/wp-content/uploads/2022/03/2-6.jpg">
+
+    </div>
+    <p>Loops are a fundamental concept in programming, and they are used to execute a block of code repeatedly. In
+        JavaScript, there are several types of loops:</p>
+
+    <div class="participation">
+        <ul>
+            <li>for loop</li>
+            <li>while loop</li>
+            <li>forEach()</li>
+            <li>filter()</li>
+            <li>map()</li>
+        </ul>
+    </div>
+    <h2>For loop</h2>
+    <p>The <code>for</code> loop is used to execute a block of code a specific number of times.
+    </p>
+    <pre>
+      <code>
+        for(let i = 0; i < 5; i++) {
+          console.log(i);
+        }
+      </code>
+    </pre>
+    <p>This code will have the same result as the previous.</p>
+
+    <h2>While loop</h2>
+    <p>The <code>while</code> loop is used to execute a block of code while a condition is true. It consists of only
+        one
+        part:</p>
+    <pre>
+      <code>
+        let i = 0;
+        while(i < 5) {
+          console.log(i);
+          i++;
+        }
+      </code>
+    </pre>
+    <p>This code will print the numbers 0 to 4 in the console.</p>
+
+    <h2>forEach()</h2>
+    <p>The <code>forEach()</code> loop is similar to the <code>for</code> loop, but the method loops through the elements of an array/collection.
+
+    <p>Here's an example:</p>
+    <pre>
+      <code>
+        let letters = [a, b, c, d];
+
+        letters.forEach(letter =>{
+          console.log(`This is letter ${letter}`)
+          }
+      </code>
+    </pre>
+
+    <h2>Map()</h2>
+    <p>
+        The <code>map()</code> method is a built-in function in JavaScript that does not modify the original array, but instead returns a new array with the transformed elements.
+
+        The <code>map()</code> method takes in a single argument, which will be called on each element of the original array.
+
+    </p>
+    <pre>
+      <code>
+        const numbers = [1, 2, 3, 4, 5];
+        const doubledNumbers = numbers.map(function(num) {
+          return num * 2;
+        });
+        console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+      </code>
+    </pre>
+
+    <h2>Filter()</h2>
+    <p>
+        The <code>filter()</code> method takes in a single argument, which is a callback function that will be called on each element of the original array.
+        The callback function should return a boolean value that indicates whether the element should be included in the new array or not.
+    </p>
+    <pre>
+      <code>
+        const numbers = [1, 2, 3, 4, 5];
+        const evenNumbers = numbers.filter(function(num) {
+          return num % 2 === 0;
+        });
+        console.log(evenNumbers); // Output: [2, 4]
+      </code>
+    </pre>
+    <h2>Chaining Methods</h2>
+    <p>
+        One of the benefits this looping is that it can be chained, using <code>filter()</code>, <code>map()</code>, and <code>sort()</code>, to perform more complex data transformations.
+        Here's an example:
+    </p>
+    <pre>
+      <code>
+        const people = [
+          { name: 'Alice', age: 25 },
+          { name: 'Bob', age: 30 },
+          { name: 'Charlie', age: 20 }
+        ];
+        const sortedNames = people
+          .filter(function(person) {
+            return person.age > 20;
+          })
+          .map(function(person) {
+            return person.name;
+          })
+          .sort();
+        console.log(sortedNames); // Output: ["Alice", "Bob"]
+      </code>
+    </pre>
+
+    <br>
+    <br>
+
+
+    <div class="row row justify-content-center">
+        <h1>Date and Time in JavaScript</h1>
+        <img src="../assets/images/timememe.jpg" width="50%">
+    </div>
+    <br>
+    <p>JavaScript provides a built-in object called Date, which allows developers to work with dates and times in
+        their
+        applications.</p>
+
+    <h2>Creating a Date Object</h2>
+    <p>To create a new Date object, you can use the <code>new Date()</code> constructor.</p>
+    <pre><code>const currentDate = new Date();</code></pre>
+    <p>This will create a new Date object representing the current date and time.</p>
+
+    <h2>Working with Dates and Times</h2>
+    <p>The Date object provides several methods for working with dates and times.</p>
+
+
+    <pre><code>
+        // Get the current date and time
+        const currentDate = new Date();
+        console.log(currentDate);
+
+        // Get the current year
+        const currentYear = new Date().getFullYear();
+        console.log(currentYear);
+
+        // Get the current month
+        const currentMonth = new Date().getMonth();
+        console.log(currentMonth);
+
+        // Get the current day of the month (1-31)
+        const currentDay = new Date().getDate();
+        console.log(currentDay);
+
+        // Get the current hour (0-23)
+        const currentHour = new Date().getHours();
+        console.log(currentHour);
+
+        // Get the current minute (0-59)
+        const currentMinute = new Date().getMinutes();
+        console.log(currentMinute);
+
+        // Get the current second (0-59)
+        const currentSecond = new Date().getSeconds();
+        console.log(currentSecond);
+
+        // Get the current millisecond (0-999)
+        const currentMillisecond = new Date().getMilliseconds();
+        console.log(currentMillisecond);
+
+        // Set the date to January 1, 2022
+        const newDate = new Date(2022, 0, 1);
+        console.log(newDate);
+
+        // Set the time to 3:30 PM
+        newDate.setHours(15);
+        newDate.setMinutes(30);
+        console.log(newDate);</code></pre>
+
+    <h2>Formatting Dates and Times</h2>
+    <p>JavaScript also provides methods for formatting dates and times into strings. </p>
+
+    <pre>
+        <code>
+            // Format the date as YYYY-MM-DD
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0,10);
+            console.log(formattedDate);
+        </code>
+    </pre>
+
+
+
+</div>
+</body>

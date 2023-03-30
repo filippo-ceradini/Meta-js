@@ -1,0 +1,154 @@
+<body>
+
+<div class="container mt-5">
+
+
+    <div class="row justify-content-center">
+        <h1>New ways of serving pages</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <img src="https://vived.io/wp-content/uploads/2022/11/71yshr.jpeg">
+    </div>
+    <h2>Client side rendering (CSR)</h2>
+
+    <p>Client-side rendering (CSR) is a technique used in web development where the rendering of web pages is performed on the client-side (i.e., in the user's web browser) using JavaScript. In a client-side rendering approach, the web server only sends the HTML skeleton of the page, along with a JavaScript bundle that is used to generate the dynamic content.
+
+        The JavaScript code executes in the user's web browser and manipulates the DOM (Document Object Model) to render the content on the screen. This allows for a more dynamic and responsive user interface, as changes can be made to the page without the need for a full page refresh.
+
+        Client-side rendering is often used in modern single-page applications (SPAs) where a lot of the application logic is handled on the client-side. Frameworks like React, Angular, and Vue.js are commonly used for client-side rendering.
+    <p>As of now our little node application works in CSR</p>
+
+    <h2>SEO</h2>
+
+    <p>SEO stands for Search Engine Optimization, which is the process of improving the quality and quantity of traffic to a website from search engines such as Google, Bing, and Yahoo through organic search results.
+
+        The goal of SEO is to increase the visibility of a website in search engine results pages (SERPs) by optimizing the website's content, structure, and HTML code. By optimizing for relevant keywords and improving the overall quality and relevance of a website, it becomes more likely to rank higher in search engine results pages for relevant queries.</p>
+    <br>
+
+    <h2>Server side rendering (SSR)</h2>
+
+    <p>Server-side rendering (SSR) is an alternative approach to client-side rendering (CSR) where the rendering of web pages is performed on the server-side before being sent to the client's web browser. With SSR, the web server generates the full HTML content of the page, including any dynamic content, and sends it to the client's browser as a fully-rendered page.
+
+        In an SSR approach, the server receives a request from the client and generates the HTML content of the requested page using a server-side rendering engine, such as Next.js or Nuxt.js. The HTML content is then sent to the client's browser, which can display it immediately without the need for any further processing.</p>
+
+        Let's modify our little app to use SSR.<br>
+
+        We're going to create a module called <code>renderingPages.js</code>, and we're gonna structure it like this
+
+    <pre>
+        <code>
+            import fs from "fs";
+       </code>
+    </pre>
+    <p>
+        We'll use fs which is a module that helps us navigate the FileSystem.
+        With it, we can generate a string corresponding to the html file we want to serve.
+    </p>
+    <pre>
+        <code>
+            function readPage(pagePath) {
+                return fs.readFileSync(pagePath).toString();
+            }
+       </code>
+    </pre>
+    <p>
+    The core of our little SSR will let us create pages that share the same navbar and footer, so we can reuse those elements (AKA components).<br>
+        As you can see, we'll replace the css, title, and add a dynamic year in the footer.
+        We can also modify the page so we can inject our meme in the center!
+        We just need to add a $MEMEBLOCK instead of our helloworld in the HTML file.
+    </p>
+    <pre>
+        <code>
+            function renderPage(page, cssString, tabTitle) {
+                page = readPage(page)
+                const navbar = fs.readFileSync("./public/navbar.html").toString()
+                    .replace("$CSS_FILENAME", cssString)
+                    .replace("$TAB_TITLE", tabTitle)
+                console.log()
+                const footer = fs.readFileSync("./public/footer.html").toString()
+                    .replace("$FOOTER_YEAR", `© ${new Date().getFullYear()}`);
+                page.replace("$MEMEBLOCK", memeStorage.memeInjector)
+                return navbar + page + footer;
+            }
+       </code>
+    </pre>
+    <p>
+    Of course we need to remember to export the functions!
+    </p>
+    <pre>
+        <code>
+
+            export default {
+                renderPage,
+                readPage
+            };
+        </code>
+    </pre>
+    <p>
+        We need now to modify our <code>app.js</code> and <code>meme-storage.js</code> to use the module that renders pages.
+    </p>
+    <pre>
+        <code>
+            <b style="color: orangered">// app.js</b>
+            import express from "express";
+            import memeStorage from "./meme-storage.js";
+            import bodyParser  from "express";
+            import rendering from "./utilities/renderingPages.js";
+            const app = express();
+            app.use(express.static("public"));
+            app.use(bodyParser.urlencoded({ extended: false }));
+            app.use(express.json());
+
+            .
+            .
+            // GET
+            app.get('/', (req, res) => {
+            res.sendFile(rendering.renderPage("./public/index.html", main.css, "Random Meme"))
+            });
+        </code>
+    </pre>
+
+    <pre>
+        <code>
+            <b style="color: orangered">// meme-storage.js</b>
+            function memeInjector() {
+            const randomIndex = Math.floor(Math.random() * memes.length);
+            const meme = memes[randomIndex];
+            let memeHtml = '';
+            if (meme.type === 'youtube') {
+            memeHtml = `
+              &ltiframe width="560" height="315" src="${meme.link}" frameborder="0" allowfullscreen></iframe>
+            `;
+             } else if (meme.type === 'img') {
+            memeHtml = `
+            &ltimg src="${meme.link}" alt="Meme">
+            `;
+            } else if (meme.type === 'video') {
+                memeHtml = `
+              &ltvideo width="560" height="315" controls>
+                &ltsource src="${meme.link}" type="video/mp4">
+                Your browser does not support the video tag.
+              &lt/video>
+            `;
+            }
+            return memeHtml;
+            }
+        </code>
+    </pre>
+
+    <p>
+        And now we get an awesome page that can display a random meme! isn't that great?
+    </p>
+
+
+    <div class="row justify-content-center">
+        <img src="">
+    </div>
+
+
+    <br>
+    <br>
+
+</div>
+</body>

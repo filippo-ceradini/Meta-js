@@ -1,0 +1,242 @@
+<body>
+
+<div class="container mt-5">
+
+
+    <div class="row justify-content-center">
+        <h1 class="mb-4">REST with Express</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <img src="https://project-static-assets.s3.amazonaws.com/APISpreadsheets/APIMemes/BackendRestAPIFrontEndBike.jpeg"
+             width="30%">
+    </div>
+    <p>
+        REST (Representational State Transfer) is a software architectural style that defines a set of constraints to be
+        used when creating web services.
+        A RESTful API (Application Programming Interface) is a web service that follows the principles of REST and
+        allows clients to interact with the service using HTTP requests.
+    <p>
+        The key principles of a RESTful API include:
+
+    <div class="participation">
+        <ul>
+            <li>Client-server architecture: The client and server are separated and can evolve independently.</li>
+            <li>Stateless: Each request from the client contains all the necessary information for the server to
+                understand and
+                process the request. The server doesn't keep any client context between requests.
+            </li>
+            <li>Uniform interface: The API should have a uniform interface that separates the concerns of the client
+                from those of
+                the server. This typically involves using HTTP verbs (GET, POST, PUT, DELETE, etc.) to represent the
+                actions that
+                can be taken on resources, and using URLs to identify the resources themselves.
+            </li>
+            <li>Cacheable: Responses should be labeled as cacheable or non-cacheable, so that clients can reuse the
+                responses.
+            </li>
+            <li>Layered system: A client can't tell whether it's communicating directly with a server or through an
+                intermediary,
+                such as a load balancer or a cache.
+            </li>
+        </ul>
+    </div>
+    </p>
+
+
+    <p>
+        Some of the key benefits of using a RESTful API include:
+    </p>
+    <div class="participation">
+        <ul>
+            <li>Scalability: RESTful APIs are designed to be scalable and can handle a large number of clients and
+                requests.
+            </li>
+            <li>Flexibility: Because the API is stateless and uses a uniform interface, it can be used with a wide
+                variety of
+                clients and servers.
+            </li>
+            <li>Simplicity: The simplicity of the RESTful API makes it easy to understand and use.</li>
+            <li>Testability: Because each request contains all the necessary information, RESTful APIs are easy to test
+                and
+                debug.
+            </li>
+        </ul>
+    </div>
+    <br>
+    <h2>a CRUDe example</h2>
+    <div class="row justify-content-center">
+        <img src="https://i.kym-cdn.com/photos/images/original/000/234/792/235.jpg">
+    </div>
+    <br>
+    <p>
+        When we built our little Node.js project we already asked for express as a dependency,
+        so we can now modify our app.js file like so:
+    </p>
+    <pre>
+        <code>
+            const express = require("express");
+            const app = express();
+
+            app.use(express.static(path.resolve("public")));
+
+            app.get("/", (req,res) => {
+                res.send("./index.html");
+
+            const PORT = 8080;
+            app.listen(PORT, (error) => {
+                if (error) {
+                    console.log(error);
+                }
+                console.log("Server running on port", PORT);
+            });
+        </code>
+    </pre>
+    <p>
+        This will let us serve some html.
+    </p>
+
+    <p>
+        Since we want a full crud page, we'll add more functionalities, so we'll start with adding something to use Json:
+    </p>
+
+    <pre>
+        <code>
+            const express = require('express');
+            const app = express();
+            app.use(express.static(path.resolve("public")));
+            app.use(express.urlencoded({ extended: true }));
+            app.use(express.json());
+                 </code>
+    </pre>
+    <p>
+        We will need some mock data. Why not use some Memes?
+    </p>
+    <pre>
+        <code>
+            // Meme storage
+            let meme = [
+            { id: 1, link: 'https://www.youtube.com/watch?v=QH2-TGUlwu4'},
+            { id: 2, link: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg'},
+            { id: 3, link: 'https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png'},
+            { id: 3, link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}];
+              </code>
+    </pre>
+    <p>
+        Through the first Get method we'll get a Json objects with all the memes.
+    </p>
+    <pre>
+        <code>
+            // GET all meme
+            app.get('/meme', (req, res) => {
+            res.send(meme);});
+              </code>
+    </pre>
+    <p>
+        If we like Nyan Cat; we can just navigate to localhost:3000/meme/1 to get the right link!<br>
+        Incredible!
+    </p>
+    <pre>
+        <code>
+            // GET single meme
+            app.get('/meme/:id', (req, res) => {
+            const singleMeme = meme.find(item => item.id === parseInt(req.params.id));
+            if (!singleMeme) {
+            return res.status(404).send('Meme not found');
+            }
+            res.send(singleMeme);});
+              </code>
+    </pre>
+    <p>
+        Through postman we can even add a new meme to our collection!
+    </p>
+    <pre>
+        <code>
+            // POST new meme
+            app.post('/meme', (req, res) => {
+            const newMeme = {
+            id: meme.length + 1,
+            name: req.body.name,
+            };
+            meme.push(newMeme);
+            res.send(newMeme);});
+        </code>
+    </pre>
+    <p>
+        And if we are bored, we can swap one..
+    </p>
+    <pre>
+        <code>
+            // PUT (update) existing meme
+            app.put('/meme/:id', (req, res) => {
+            const singleMeme = meme.find(item => item.id === parseInt(req.params.id));
+            if (!singleMeme) {
+            return res.status(404).send('Meme not found');
+            }
+            singleMeme.name = req.body.name;
+            res.send(singleMeme);});
+        </code>
+    </pre>
+    <p>
+        And delete one if we find a bad one..
+    </p>
+    <pre>
+        <code>
+            // DELETE meme
+            app.delete('/meme/:id', (req, res) => {
+            const singleMeme = meme.find(item => item.id === parseInt(req.params.id));
+            if (!singleMeme) {
+            return res.status(404).send('Meme not found');
+            }
+            const index = meme.indexOf(singleMeme);
+            meme.splice(index, 1);
+            res.send(singleMeme);});
+        </code>
+    </pre>
+    <p>
+        For now we are only serving an empty hello World! HTML page,<br>
+        but soon we'll get to play with our memes!
+    </p>
+    <pre>
+        <code>
+            app.get('/', (req, res) => {
+            res.sendFile(`
+                 &lt;html&gt;
+                 &lt;head&gt;
+                   &lt;style&gt;
+                     body {
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       height: 100vh;
+                     }
+                   &lt;/style&gt;
+                 &lt;/head&gt;
+                 &lt;body&gt;
+                   &lt;h1&gt;Hello World&lt;/h1&gt;
+                 &lt;/body&gt;
+                 &lt;/html&gt;
+                 `);});
+
+            // Start server
+            const port = process.env.PORT || 3000;
+            app.listen(port, () => console.log(`Server running on port 3000`));
+        </code>
+    </pre>
+    <p>
+        Now if we want to modify something and not have to rerun the server all the time we can use nodemon, which is a tool that monitors the changes in the source code and automatically restarts the server.
+    </p>
+
+    <pre>
+        <code>
+            nodemon app.js
+        </code>
+    </pre>
+
+    <div class="row justify-content-center">
+        <img src="https://media.tenor.com/JjY18W3iN8EAAAAC/noice-brooklyn-ninenine.gif">
+    </div>
+    <br>
+    <br>
+</div>
+</body>

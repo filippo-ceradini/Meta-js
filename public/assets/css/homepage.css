@@ -1,0 +1,20 @@
+body {
+    background-color: #000000;
+    background-image: url("/assets/images/bg_stars.gif");/*It only works like this*/
+    color: #ff0000;
+    link-color: #ff4c4c;
+}
+
+link-color{
+    font-family: "Comic Sans MS";
+    color: red;
+}
+
+#linkfooter{
+    font-family: "Comic Sans MS";
+    color: red;
+}
+
+p{
+    color: red;
+}

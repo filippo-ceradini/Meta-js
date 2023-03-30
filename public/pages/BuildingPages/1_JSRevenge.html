@@ -1,0 +1,156 @@
+<body>
+
+<div class="container mt-5 ">
+
+
+    <div>
+        <p>
+            Before going into more details, we'll introduce a bit more interesting stuff we can do with JS.
+            But don't worry, after this is all building!
+        </p>
+
+        <h1>Type Coercion in JavaScript</h1>
+        <div class="row justify-content-center">
+                <img src="https://pbs.twimg.com/media/FYlc7gyaMAA2rVv.jpg">
+        </div>
+        <p>JavaScript is a loosely typed language, which means that variables can change their data type during runtime.
+            Type coercion is the process of converting one data type to another implicitly or explicitly.</p>
+        <h2>Implicit Type Coercion</h2>
+        <p>Implicit type coercion is the automatic conversion of one data type to another data type, which is performed
+            by JavaScript behind the scenes. It can occur in different situations, such as when using operators,
+            comparing values, or passing arguments to functions.</p>
+        <p>Here are some examples of implicit type coercion:</p>
+        <ul>
+            <li><code>1 + '2' // '12'</code> - In this example, the number 1 is implicitly converted to a string, and
+                then concatenated with the string '2'.
+            </li>
+            <li><code>'3' == 3 // true</code> - In this example, the string '3' is implicitly converted to the number 3,
+                and then compared with the number 3.
+            </li>
+            <li><code>true == 1 // true</code> - In this example, the boolean value true is implicitly converted to the
+                number 1, and then compared with the number 1.
+            </li>
+        </ul>
+        <h2>Explicit Type Coercion</h2>
+        <p>Explicit type coercion is the manual conversion of one data type to another data type, which is performed
+            using JavaScript functions or operators. It is also known as type casting.</p>
+        <p>Here are some examples of explicit type coercion:</p>
+        <ul>
+            <li><code>Number('5') // 5</code> - In this example, the string '5' is explicitly converted to a number
+                using the Number() function.
+            </li>
+            <li><code>String(123) // '123'</code> - In this example, the number 123 is explicitly converted to a string
+                using the String() function.
+            </li>
+            <li><code>Boolean(0) // false</code> - In this example, the number 0 is explicitly converted to a boolean
+                value using the Boolean() function.
+            </li>
+        </ul>
+        <h2>Preventing Type Coercion Issues</h2>
+        <p>Type coercion can cause issues in JavaScript programs, especially when comparing values or using conditional
+            statements. To prevent type coercion issues, it's recommended to use strict equality (===) instead of loose
+            equality (==), and to explicitly convert values to the expected data type using the appropriate functions or
+            operators.</p>
+        <p>For example:</p>
+        <ul>
+            <li><code>'3' === 3 // false</code> - Using strict equality, the string '3' is not equal to the number 3, so
+                the comparison returns false.
+            </li>
+            <li><code>Number('3') === 3 // true</code> - Explicitly converting the string '3' to a number using the
+                Number() function, the comparison returns true.
+            </li>
+        </ul>
+    </div>
+
+    <div class="row justify-content-center">
+        <h1>Fetch() in JavaScript</h1>
+        <img src="https://i.pinimg.com/736x/f5/83/a8/f583a8ccbacb9da6ff24d6affb1a47e0.jpg">
+    </div>
+<br>
+    <p>
+        The <code>fetch()</code> function is a built-in function in JavaScript used to make asynchronous HTTP
+        requests
+        to servers.
+        It returns a promise that resolves to the response of the request.
+        The response is an object that represents the response received from the server.
+    </p>
+    <p>
+        The <code>fetch()</code> function takes in one required parameter, the URL of the resource that is being
+        requested.
+        It can also take in an optional second parameter, an object that can include different configurations for
+        the
+        request.
+        For example, headers, method, body, mode, cache, credentials, and redirect.
+    </p>
+    <p>
+        Here's an example of how to use <code>fetch()</code>:
+    </p>
+    <pre>
+      <code>
+        fetch('https://jsonplaceholder.typicode.com/posts/1')
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+      </code>
+    </pre>
+
+    <h1>Callback Functions</h1>
+    <div class="row justify-content-center">
+        <img src="https://i.imgflip.com/6ox8d0.jpg">
+    </div>
+    <br>
+    <p>A callback function is a function that is passed as an argument to another function, with the intention that it
+        will be called at a later point in time. This allows for the parent function to execute its logic while the
+        callback function handles any asynchronous tasks, such as fetching data or handling events.</p>
+    <p>When a function receives a callback function as an argument, it can store that function in a variable or pass it
+        along to another function for later execution. When the parent function completes its execution, it can then
+        call the callback function, passing along any necessary arguments.</p>
+    <p>For example, let's say we have a function that fetches data from an API:</p>
+    <pre>
+        <code>
+        function fetchData(url, callback) {
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              callback(xhr.responseText);
+            }
+          }
+          xhr.open('GET', url);
+          xhr.send();
+        }
+        </code>
+    </pre>
+    <p>To use this function, we would pass in a callback function as the second argument:</p>
+    <pre>
+    <code>
+        fetchData('https://jsonplaceholder.typicode.com/users', function(data) {
+          console.log(data);
+        });
+    </code>
+  </pre>
+    <p>Callback functions are commonly used for handling asynchronous code, such as making API requests or handling
+        events. Here are a few examples:</p>
+    <ul>
+        <li><strong>API Requests:</strong> As we saw in the example above, callback functions are commonly used when
+            making API requests. The parent function can handle setting up the request and parsing the response, while
+            the callback function handles what to do with the data.
+        </li>
+        <li><strong>Event Handling:</strong> When working with events in JavaScript, callback functions are often used
+            to handle the event. For example, when a button is clicked, a callback function can be called to perform a
+            specific action.
+        </li>
+        <li><strong>Asynchronous Operations:</strong> Callback functions are also useful for handling any kind of
+            asynchronous operation, such as reading a file or performing a complex calculation. The callback function
+            can be used to handle the result of the operation.
+        </li>
+    </ul>
+
+
+    <br>
+    <br>
+    <p>
+        Now we know enough basics to start building our Node.JS webpage.
+    </p>
+
+</div>
+</body>

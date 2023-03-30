@@ -1,0 +1,196 @@
+<body>
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <h1 class="mb-4">Everyone Likes Nodes</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <img src="../assets/images/nodeMeme.png">
+    </div>
+
+    <h2>Node.js installation</h2>
+
+    <p>
+        The easiest way to get Node.js running on MacOS is to use brew:
+    </p>
+    <pre>
+        <code>
+            brew install node
+        </code>
+    </pre>
+
+    <h2>Node.js Structure</h2>
+    <p>
+        Node.js uses a very simple file structure: <b>package.json</b> and <b>app.js</b>.
+
+    </p>
+    <p>
+        The <b>package.json</b> file is a JSON file that contains important information about your Node.js application,
+        including its name, version, description, entry point, dependencies, and more.
+        It's typically located at the root of your project directory and is automatically created when you run npm init.
+        You can also manually create and edit this file.
+    </p>
+    <p>
+        One of the key functions of the package.json file is to manage your project's dependencies.
+        You can specify which dependencies your project needs by adding them to the dependencies section of the file.
+        When you run <b>npm install</b> or <b>npm install &lt;package_name&gt;</b>,
+        npm will automatically install the necessary dependencies and save them to the node_modules directory.
+    </p>
+    <pre>
+        <code>
+                {
+                  "name": "my-website-with-node",
+                  "version": "1.0.0",
+                  "description": "A simple Node.js application",
+                  "main": "app.js",
+                  "dependencies": {
+                    "express": "^4.17.1",
+                  }
+                }
+
+        </code>
+    </pre>
+    <p>
+        The <b>app.js</b> file is typically the entry point for your Node.js application.
+        It contains the code that runs your application and handles incoming requests.
+        This file can be named differently, but it needs to be specified in the main property of your package.json file.
+    </p>
+        We can so create a new project by creating an app.js file and a package.json,
+    <p>
+
+    </p>
+
+    <h2>Packages and Dependencies</h2>
+
+    <div class="row justify-content-center">
+        <img src="https://i.redd.it/5w8tp1t1nrb51.jpg" width="50%">
+    </div>
+    <p>
+        As introduced before Node.js has a large ecosystem of third-party modules and packages that can be installed and used in our projects
+        using a package manager called npm (Node Package Manager).
+        You can install a package and its dependencies by running <code>npm install &lt;package_name&gt;</code> in your
+        terminal.
+    </p>
+    <pre>
+      <code>
+        // Install the is-odd package
+        npm install is-odd
+          // app.js
+          const isOdd = require('is-odd);
+          const numbers = [1, 2, 3, 4, 5];
+          numbers.forEach(num =>{
+          console.log(`is ${num} odd? `+isOdd(num))
+          })
+
+      </code>
+    </pre>
+
+    <p>
+        You can also install a package and its dependencies by running <code>npm install &lt;package_name&gt;</code> in
+        your terminal.
+    </p>
+
+
+
+    <h2>Express</h2>
+    <div class="row justify-content-center">
+        <img src="https://i0.wp.com/www.infragistics.com/community/cfs-filesystemfile.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/dhananjay_5F00_kumar.Post4/2235.1.jpg" width="50%">
+    </div>
+    <p>Express is a popular, minimalist web framework for Node.js that provides a set of features for building web applications,
+        APIs, and other HTTP-based services.
+        Some of the key features of Express include:
+    <div class="participation">
+        <ul>
+            <li>Routing: Express allows you to define routes for handling incoming HTTP requests based on the request method
+                (GET, POST, PUT, DELETE, etc.) and the URL path.</li>
+            <li>Middleware: Express uses middleware functions to handle requests and responses in a modular and reusable way.
+                Middleware functions can be used to add functionality such as authentication, logging, and error handling to
+                your application.</li>
+            <li>Views and templates: Express supports a variety of templating engines and view libraries, allowing you to
+                generate dynamic HTML, XML, and other formats.</li>
+            <li>Error handling: Express provides a built-in error handling middleware function that can be used to handle errors
+                and exceptions that occur during request processing.</li>
+            <li>Static files: Express can serve static files such as images, CSS, and JavaScript files directly from the file
+                system.</li>
+        </ul>
+    </div>
+<br>
+    <br>
+    <h2>Building</h2>
+<!--    <div class="row justify-content-center">-->
+<!--        <img src="https://i0.wp.com/www.infragistics.com/community/cfs-filesystemfile.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/dhananjay_5F00_kumar.Post4/2235.1.jpg" width="50%">-->
+<!--    </div>-->
+    <p>
+        Let's build our website!<br>
+
+        Create a folder, inside it a file that we're going to call package.json
+
+        and let's structure it like this
+    </p>
+    <pre>
+      <code>
+          {
+          "name": "easy-js",
+          "version": "1.0.0",
+          "description": "easy Js website",
+          "main": "app.js",
+          "license": "MIT",
+          "dependencies": {
+          "express": "^4.18.2"
+            }
+          }
+      </code>
+    </pre>
+
+    <p>
+        Create a file with nano and call it app.js
+    </p>
+
+    <pre>
+      <code>
+          nano ~/{path-to-folder}/app.js
+      </code>
+    </pre>
+
+    <p>Add a nice hello world message:</p>
+
+    <pre>
+      <code>
+          console.log("Hello World!")
+      </code>
+    </pre>
+
+    <p>Don't forget to save! <br>
+    now we can install:
+    </p>
+
+    <pre>
+      <code>
+          npm install
+      </code>
+    </pre>
+
+    <p>And finally run:
+    </p>
+
+    <pre>
+      <code>
+          node app.js
+      </code>
+    </pre>
+
+    <p>And that's it! Welcome to Node.Js</p>
+
+        <div class="row justify-content-center">
+            <img src="../assets/images/building/1.png" width="50%">
+        </div>
+
+    <br>
+    <br>
+
+
+
+</div>
+</body>
