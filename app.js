@@ -11,11 +11,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 //-------------CSS-------------------------------------------------//
 const oldCss = "oldButGold.css"
 const homepageCss = "homepage.css"
-const the1999css = "1999.css"
-const jimmyCss = "zenGarden/robotJimmy.css"
 const fullscreen = "zenGarden/fullscreen.css"
-const apothecary = "zenGarden/apothecary.css"
-
+const modern = "modern.css"
 
 app.get('/HistoryPages/:name', (req, res) => {
     res.send(rendering.renderPage("./public/pages/HistoryPages/" + req.params.name + ".html", oldCss, "JS Adventure! | " + req.params.name));
@@ -26,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/BuildingPages/:name", (req, res) => {
-    res.send(rendering.renderPage("./public/pages/BuildingPages/" + req.params.name + ".html", fullscreen, "JS Adventure! | " + req.params.name));
+    res.send(rendering.renderPage("./public/pages/BuildingPages/" + req.params.name + ".html", modern, "JS Adventure! | " + req.params.name));
 });
 
 app.get("/NewPages/:name", (req, res) => {
