@@ -99,6 +99,38 @@
           .catch(error => console.error(error));
       </code>
     </pre>
+
+
+    <div class="row justify-content-center">
+        <h1>The Dangers of Cross-Site Scripting (XSS)</h1>
+    </div>
+    <div class="row justify-content-center">
+
+        <img src="https://preview.redd.it/679a5u9jnjh61.jpg?auto=webp&s=cbd36176c75f27f6fdffa2adc2b06ad174fbe953" width="50%
+">
+    </div>
+    <p>Cross-Site Scripting (XSS) is a type of security vulnerability. It allows an attacker to inject malicious code into a web page, which can then be executed by unsuspecting users who visit that page.</p>
+    <p>XSS attacks typically occur when a web application does not properly validate user input before displaying it to other users. This can happen in a number of ways, such as:</p>
+
+    <ul>
+        <li>Allowing users to enter text into a form field that is then displayed on a web page</li>
+        <li>Allowing users to upload files that can contain scripts</li>
+        <li>Allowing users to input URLs that contain scripts</li>
+    </ul>
+
+    <p>An attacker can exploit these vulnerabilities by injecting malicious code into the input fields. When the user's browser displays the page, it will execute the malicious code as if it were part of the page itself. This can allow the attacker to steal sensitive information, such as passwords or credit card numbers, or perform other malicious actions on behalf of the user.</p>
+
+    <p>The best way to prevent XSS attacks is to properly sanitize all user input before displaying it to other users. This can involve:</p>
+
+    <ul>
+        <li>Removing or encoding special characters that can be used to execute scripts, such as &lt;, &gt;, and &amp;</li>
+        <li>Limiting the types of input that can be entered into form fields, such as allowing only plain text or specific types of files</li>
+        <li>Using frameworks or libraries that provide built-in protections against XSS attacks, such as Content Security Policy (CSP) and DOMPurify</li>
+    </ul>
+
+    <p>
+        To sanitize user input we can use sanitize-html in Node.Js.
+    </p>
     <div class="row justify-content-center">
         <h1>Callback Functions</h1></div>
     <div class="row justify-content-center">

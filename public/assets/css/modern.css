@@ -56,16 +56,14 @@ img {
 
 code {
     background-color: #f2f2f2;
-    border-radius: 5px;
     font-family: 'Courier New', Courier, monospace;
-    padding: 2px 5px;
+
 }
 
 pre {
     background-color: #f2f2f2;
-    border-radius: 5px;
+
     font-family: 'Courier New', Courier, monospace;
-    padding: 10px;
     overflow-x: auto;
 }
 
